@@ -44,7 +44,7 @@ export const LogIn = styled.div`
     font-weight: 500;
 `
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
     justify-content: center;
     display: flex;
     flex-direction: column;

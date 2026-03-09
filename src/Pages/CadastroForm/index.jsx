@@ -5,6 +5,32 @@ export function CadastroForm(){
 
     const navigate = useNavigate()
 
+    async function handleCadastro(e) {
+        e.preventDefault()
+
+        const formData = new FormData(e.target)
+
+        const data = {
+            name: formData.get('username'),
+            email: formData.get('email'),
+            senha: formData.get('senha'),
+            confirmSenha: formData.get('confirmSenha')
+        }
+
+        if (data.senha !== data.confirmSenha) {
+            alert('Senhas não são iguais.')
+            return
+        }
+
+        await fetch("http://localhost:3000/Cadastro") , {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }
+    }
+
     return(
         <>
         
@@ -23,11 +49,11 @@ export function CadastroForm(){
                 <S.LogIn>Cadastro de usuário</S.LogIn>
                 <div style={{fontSize: '0.8rem', marginTop: '0.5rem'}}>Crie uma conta CriticPlay</div>
 
-                <S.FormContainer>
-                    <S.FormItem type='text' placeholder='Nome de Usuário'></S.FormItem>
-                    <S.FormItem  type='text' placeholder='E-mail'></S.FormItem>    
-                    <S.FormItem type='password' placeholder='Senha'></S.FormItem>
-                    <S.FormItem  type='password' placeholder='Confirmar Senha'></S.FormItem>
+                <S.FormContainer onSubmit={() => handleCadastro()} >
+                    <S.FormItem type='text' placeholder='Nome de Usuário' name='username'></S.FormItem>
+                    <S.FormItem  type='text' placeholder='E-mail' name='email'></S.FormItem>    
+                    <S.FormItem type='password' placeholder='Senha' name='senha'></S.FormItem>
+                    <S.FormItem  type='password' placeholder='Confirmar Senha' name='confirmSenha'></S.FormItem>
                     <S.FormButton>Cadastrar</S.FormButton>
                 </S.FormContainer>
                 
