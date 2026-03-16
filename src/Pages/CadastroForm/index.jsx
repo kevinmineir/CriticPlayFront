@@ -37,13 +37,12 @@ export function CadastroForm(){
         <S.Wrapper>
             <S.Container>
                 <S.FormHeader>
-                    <S.CustomSpan style={{color: "white"}}>
+                    <S.CustomSpan style={{padding: "0 0.5rem 0.2rem 0.5rem", backgroundColor: "#FF2D2D"}}>
                         Critic
                     </S.CustomSpan>
-                    <S.CustomSpan style={{marginLeft:"0.2rem", padding: "0 0.5rem 0 0.5rem", backgroundColor: "orange", color: "rgb(20, 18, 18)"}}>
-                        Play
+                    <S.CustomSpan style={{paddingLeft: "0.2rem" ,color: "#FF2D2D"}}>
+                        Zone
                     </S.CustomSpan>
-                    
                 </S.FormHeader>
                 
                 <S.LogIn>Cadastro de usuário</S.LogIn>
@@ -54,7 +53,7 @@ export function CadastroForm(){
                     <S.FormItem  type='text' placeholder='E-mail' name='email'></S.FormItem>    
                     <S.FormItem type='password' placeholder='Senha' name='senha'></S.FormItem>
                     <S.FormItem  type='password' placeholder='Confirmar Senha' name='confirmSenha'></S.FormItem>
-                    <S.FormButton>Cadastrar</S.FormButton>
+                    <S.FormButton type='submit'>Cadastrar</S.FormButton>
                 </S.FormContainer>
                 
                 <S.UtilitiesContainer>

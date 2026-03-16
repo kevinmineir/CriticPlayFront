@@ -33,6 +33,7 @@ export const CustomSpan = styled.span`
     font-size: 1.5rem;
     border-radius: 10px;
     font-weight: 600;
+    user-select: none;
 `
 
 export const LogIn = styled.div`

@@ -24,8 +24,8 @@ export const Container = styled.div`
 `
 
 export const ErrorCode = styled.div`
-    background-color: orange;
-    color: black;
+    background-color: #FF2D2D;
+    color: white;
     font-size: 5.3rem;
     text-align: center;
     width: fit-content;
@@ -33,6 +33,7 @@ export const ErrorCode = styled.div`
     font-weight: 600;
     border-radius: 10px;
     padding: 0 0.5rem 0 0.5rem;
+    user-select: none;
 `
 
 export const ErrorMessage = styled.div`
