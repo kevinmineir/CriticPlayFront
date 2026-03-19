@@ -53,7 +53,11 @@ export function CadastroForm(){
                     <S.FormItem  type='text' placeholder='E-mail' name='email'></S.FormItem>    
                     <S.FormItem type='password' placeholder='Senha' name='senha'></S.FormItem>
                     <S.FormItem  type='password' placeholder='Confirmar Senha' name='confirmSenha'></S.FormItem>
+<<<<<<< Updated upstream
                     <S.FormButton type='submit'>Cadastrar</S.FormButton>
+=======
+                    <S.FormButton type='submit' >Cadastrar</S.FormButton>
+>>>>>>> Stashed changes
                 </S.FormContainer>
                 
                 <S.UtilitiesContainer>
