@@ -5,10 +5,6 @@ export function LoginForm(){
     
     const navigate = useNavigate()
 
-<<<<<<< Updated upstream
-    // adicionar onSubmit={() => handleLogin()} no FormContainer
-
-=======
     async function handleLogin(e) {
         e.preventDefault()
 
@@ -28,7 +24,6 @@ export function LoginForm(){
         }
 
     }
->>>>>>> Stashed changes
     return(
         <>
         
@@ -46,17 +41,10 @@ export function LoginForm(){
                 <S.LogIn>Login de usuário</S.LogIn>
                 <div style={{fontSize: '0.8rem', marginTop: '0.5rem'}}>Faça login em sua conta CriticPlay</div>
 
-<<<<<<< Updated upstream
-                <S.FormContainer>    
-                    <S.FormItem type='text' placeholder='E-mail ou Nome De Usuário' name='login'></S.FormItem>
-                    <S.FormItem  type='password' placeholder='Senha'></S.FormItem>
-                    <S.FormButton action="submit">Login</S.FormButton>
-=======
                 <S.FormContainer onSubmit={() => handleLogin()}>    
                     <S.FormItem name='email' type='text' placeholder='E-mail'></S.FormItem>
                     <S.FormItem name='senha' type='password' placeholder='Senha CriticZone'></S.FormItem>
                     <S.FormButton type='submit'>Login</S.FormButton>
->>>>>>> Stashed changes
                 </S.FormContainer>
                 
                 <S.UtilitiesContainer>
