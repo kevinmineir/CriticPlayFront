@@ -1,11 +1,14 @@
+import { Header } from "../../Components/Header/index.jsx"
 import { useNavigate } from "react-router-dom"
 
-import { Header } from "../../Components/Header/index.jsx"
+import { useAuth } from "../../hooks/useAuth.js"
 
 export function HomePage() {
 
+    useAuth()
     const navigate = useNavigate()
     
+
     return (
         <>
         <Header />

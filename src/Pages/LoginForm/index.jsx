@@ -15,13 +15,17 @@ export function LoginForm(){
             senha: formData.get('senha')
         }
 
-        await fetch('http://localhost:3000/Login'), {
+        const response = await fetch('http://localhost:3000/Login', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
-        }
+        })
+
+        const result = await response.json()
+
+        localStorage.setItem('token',result.token)
 
     }
     return(
