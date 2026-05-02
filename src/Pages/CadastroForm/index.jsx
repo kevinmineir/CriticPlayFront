@@ -1,12 +1,18 @@
 import * as S from './styles.js'
 import {useNavigate} from "react-router-dom"
+import { useState } from 'react'
 
 export function CadastroForm(){
 
     const navigate = useNavigate()
 
+    const [possuiConta,setPossuiConta] = useState(false)
+    const [senhaDiferente,setSenhaDiferente] = useState(true)
+    const [camposPreenchidos, setCamposPreenchidos] = useState(true)
+
     async function handleCadastro(e) {
-        e.preventDefault()
+        try{
+            e.preventDefault()
 
         const formData = new FormData(e.target)
 
@@ -17,8 +23,13 @@ export function CadastroForm(){
             confirmSenha: formData.get('confirmSenha')
         }
 
+        if (!data.name || !data.email || !data.senha || !data.confirmSenha) {
+            setCamposPreenchidos(prevCamposPreenchidos => !prevCamposPreenchidos)
+            return
+        }
+
         if (data.senha !== data.confirmSenha) {
-            alert('Senhas não são iguais.')
+            setSenhaDiferente(prevSenhaDiferente => !prevSenhaDiferente)
             return
         }
 
@@ -29,10 +40,20 @@ export function CadastroForm(){
             },
             body: JSON.stringify(data)
         })
-
+        if (response.status !== 200) {
+            if (response.status === 401) {
+                setPossuiConta(prevPossuiConta => !prevPossuiConta)
+                return
+            }
+            console.log(response.Error)
+            return
+        }
         const result = await response.json()
-
+      
         localStorage.setItem('token',result.token)
+        }catch(err){
+            console.log(err)
+        }
     }
 
     return(
@@ -52,11 +73,15 @@ export function CadastroForm(){
                 <S.LogIn>Cadastro de usuário</S.LogIn>
                 <div style={{fontSize: '0.8rem', marginTop: '0.5rem'}}>Crie uma conta CriticPlay</div>
 
-                <S.FormContainer onSubmit={() => handleCadastro()} >
+                <S.FormContainer onSubmit={(e) => handleCadastro(e)} >
                     <S.FormItem type='text' placeholder='Nome de Usuário' name='username'></S.FormItem>
-                    <S.FormItem  type='text' placeholder='E-mail' name='email'></S.FormItem>    
+                    {}
+                    <S.FormItem  type='text' placeholder='E-mail' name='email'></S.FormItem>
                     <S.FormItem type='password' placeholder='Senha' name='senha'></S.FormItem>
                     <S.FormItem  type='password' placeholder='Confirmar Senha' name='confirmSenha'></S.FormItem>
+                    {possuiConta === true ? <S.aviso>Email já possui conta CriticPlay</S.aviso> : null}
+                    {senhaDiferente === false ? <S.aviso>As senhas precisam ser iguais</S.aviso> : null}
+                    {camposPreenchidos === false ? <S.aviso>Todos os campos precisam estar preenchidos</S.aviso> : null}
                     <S.FormButton type='submit' >Cadastrar</S.FormButton>
                 </S.FormContainer>
                 

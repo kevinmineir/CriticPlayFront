@@ -106,3 +106,12 @@ export const SingUpLink = styled.div`
         color: white;
     }
 `
+export const aviso = styled.div`
+    font-weight: 400;
+    font-size: 0.6rem;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin-right: auto;
+    color: #FF2D2D;
+`

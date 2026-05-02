@@ -6,27 +6,31 @@ export function LoginForm(){
     const navigate = useNavigate()
 
     async function handleLogin(e) {
-        e.preventDefault()
+        try{
+            e.preventDefault()
 
-        const formData = new FormData(e.target)
+            const formData = new FormData(e.target)
 
-        const data = {
-            email: formData.get('email'),
-            senha: formData.get('senha')
+            const data = {
+                email: formData.get('email'),
+                senha: formData.get('senha')
+            }
+
+            const response = await fetch('http://localhost:3000/Login', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+
+            const result = await response.json()
+
+            localStorage.setItem('token',result.token)
+
+        }catch(err){
+            console.log(err)
         }
-
-        const response = await fetch('http://localhost:3000/Login', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-
-        const result = await response.json()
-
-        localStorage.setItem('token',result.token)
-
     }
     return(
         <>
@@ -45,7 +49,7 @@ export function LoginForm(){
                 <S.LogIn>Login de usuário</S.LogIn>
                 <div style={{fontSize: '0.8rem', marginTop: '0.5rem'}}>Faça login em sua conta CriticPlay</div>
 
-                <S.FormContainer onSubmit={() => handleLogin()}>    
+                <S.FormContainer onSubmit={(e) => handleLogin(e)}>    
                     <S.FormItem name='email' type='text' placeholder='E-mail'></S.FormItem>
                     <S.FormItem name='senha' type='password' placeholder='Senha CriticZone'></S.FormItem>
                     <S.FormButton type='submit'>Login</S.FormButton>

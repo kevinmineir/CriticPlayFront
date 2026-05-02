@@ -9,7 +9,7 @@ export function useAuth() {
       const token = localStorage.getItem("token")
 
       if (!token) {
-        navigate("/login")
+        navigate("/Login")
         return
       }
 
@@ -22,12 +22,12 @@ export function useAuth() {
 
         if (!response.ok) {
           localStorage.removeItem("token")
-          navigate("/login")
+          navigate("/Login")
         }
 
       } catch (err) {
         console.log(err)
-        navigate("/login")
+        navigate("/Login")
       }
     }
 
