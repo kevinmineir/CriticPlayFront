@@ -9,6 +9,19 @@ export function CadastroForm(){
     const [possuiConta,setPossuiConta] = useState(false)
     const [senhaDiferente,setSenhaDiferente] = useState(true)
     const [camposPreenchidos, setCamposPreenchidos] = useState(true)
+    const [requisitosSenha, setRequisitosSenha] = useState(true)
+
+    function validarSenha(senha) {
+        const temMaiscula = /[A-Z]/.test(senha)
+        const temMinuscula = /[a-z]/.test(senha)
+        const temNumero = /[0-9]/.test(senha)
+
+        return {
+            temMaiscula,
+            temMinuscula,
+            temNumero
+        }
+    }
 
     async function handleCadastro(e) {
         try{
@@ -22,14 +35,21 @@ export function CadastroForm(){
             senha: formData.get('senha'),
             confirmSenha: formData.get('confirmSenha')
         }
+        
+        const senhaValida = validarSenha(data.senha)
 
         if (!data.name || !data.email || !data.senha || !data.confirmSenha) {
-            setCamposPreenchidos(prevCamposPreenchidos => !prevCamposPreenchidos)
+            setCamposPreenchidos(false)
+            return
+        }
+
+        if (!senhaValida.temMaiscula || !senhaValida.temMinuscula || !senhaValida.temNumero) {
+            setRequisitosSenha(false)
             return
         }
 
         if (data.senha !== data.confirmSenha) {
-            setSenhaDiferente(prevSenhaDiferente => !prevSenhaDiferente)
+            setSenhaDiferente(false)
             return
         }
 
@@ -50,7 +70,13 @@ export function CadastroForm(){
         }
         const result = await response.json()
       
-        localStorage.setItem('token',result.token)
+        if(response.ok) {
+            localStorage.setItem('token', result.token)
+            navigate("/Home")
+            return
+        }
+
+        console.log(response)
         }catch(err){
             console.log(err)
         }
@@ -77,11 +103,12 @@ export function CadastroForm(){
                     <S.FormItem type='text' placeholder='Nome de Usuário' name='username'></S.FormItem>
                     {}
                     <S.FormItem  type='text' placeholder='E-mail' name='email'></S.FormItem>
-                    <S.FormItem type='password' placeholder='Senha' name='senha'></S.FormItem>
-                    <S.FormItem  type='password' placeholder='Confirmar Senha' name='confirmSenha'></S.FormItem>
+                    <S.FormItem type='password' placeholder='Senha' autoComplete='off' name='senha'></S.FormItem>
+                    <S.FormItem  type='password'  placeholder='Confirmar Senha' autoComplete='off' name='confirmSenha'></S.FormItem>
                     {possuiConta === true ? <S.aviso>Email já possui conta CriticPlay</S.aviso> : null}
                     {senhaDiferente === false ? <S.aviso>As senhas precisam ser iguais</S.aviso> : null}
                     {camposPreenchidos === false ? <S.aviso>Todos os campos precisam estar preenchidos</S.aviso> : null}
+                    {requisitosSenha === false ? <S.aviso>A senha Necessita ter 1 letra maiúscula, 1 minúscula e 1 número</S.aviso> : null}
                     <S.FormButton type='submit' >Cadastrar</S.FormButton>
                 </S.FormContainer>
                 

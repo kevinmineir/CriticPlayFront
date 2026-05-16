@@ -6,8 +6,8 @@ import { useAuth } from "../../hooks/useAuth.js"
 export function HomePage() {
 
     useAuth()
+
     const navigate = useNavigate()
-    
 
     return (
         <>

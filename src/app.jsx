@@ -8,7 +8,7 @@ import { PageNotFound } from "./Pages/PageNotFound/index.jsx";
 export function App() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage/>} />  
+      <Route path="/Home" element={<HomePage/>} />  
       <Route path="/Login" element={ <LoginForm/>} />
       <Route path="/Cadastro" element={ <CadastroForm/>} />
       <Route path="*" element={ <PageNotFound/> } />

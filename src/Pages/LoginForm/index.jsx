@@ -26,7 +26,13 @@ export function LoginForm(){
 
             const result = await response.json()
 
-            localStorage.setItem('token',result.token)
+            if(response.ok) {
+                localStorage.setItem('token', result.token)
+                navigate("/Home")
+                return
+            }
+
+            console.log(response)
 
         }catch(err){
             console.log(err)
@@ -51,7 +57,7 @@ export function LoginForm(){
 
                 <S.FormContainer onSubmit={(e) => handleLogin(e)}>    
                     <S.FormItem name='email' type='text' placeholder='E-mail'></S.FormItem>
-                    <S.FormItem name='senha' type='password' placeholder='Senha CriticZone'></S.FormItem>
+                    <S.FormItem name='senha' autoComplete='off' type='password' placeholder='Senha CriticZone'></S.FormItem>
                     <S.FormButton type='submit'>Login</S.FormButton>
                 </S.FormContainer>
                 

@@ -12,7 +12,7 @@ export function PageNotFound(){
                     <S.ErrorCode>404</S.ErrorCode>
                     <S.ErrorMessage>Not Found</S.ErrorMessage>
                     <S.ErrorDesc>A página que você está procurando não foi encontrada.</S.ErrorDesc>
-                    <S.ReturnHome onClick={() => navigate("/")}>Voltar para a página inicial</S.ReturnHome>
+                    <S.ReturnHome onClick={() => navigate("/Home")}>Voltar para a página inicial</S.ReturnHome>
                 </S.Container>
             </S.Wrapper>
         </>
