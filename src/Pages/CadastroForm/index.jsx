@@ -6,10 +6,13 @@ export function CadastroForm(){
 
     const navigate = useNavigate()
 
-    const [possuiConta,setPossuiConta] = useState(false)
-    const [senhaDiferente,setSenhaDiferente] = useState(true)
-    const [camposPreenchidos, setCamposPreenchidos] = useState(true)
-    const [requisitosSenha, setRequisitosSenha] = useState(true)
+    const [erros,setErros] = useState({
+        camposImcompletos: false,
+        emailInvalido: false,
+        senhaInvalida: false,
+        senhaIgual: false,
+        possuiConta: false
+    })
 
     function validarSenha(senha) {
         const temMaiscula = /[A-Z]/.test(senha)
@@ -21,6 +24,12 @@ export function CadastroForm(){
             temMinuscula,
             temNumero
         }
+    }
+
+    function validarEmail(email) {
+        const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+        return emailValido.test(email)
     }
 
     async function handleCadastro(e) {
@@ -35,21 +44,36 @@ export function CadastroForm(){
             senha: formData.get('senha'),
             confirmSenha: formData.get('confirmSenha')
         }
-        
-        const senhaValida = validarSenha(data.senha)
 
         if (!data.name || !data.email || !data.senha || !data.confirmSenha) {
-            setCamposPreenchidos(false)
+            setErros(prev => ({
+                ...prev,
+                camposImcompletos: true,
+                emailValido: false,
+                senhaInvalida: false,
+                senhaIgual: false,
+                possuiConta: false
+            }))
             return
         }
+        setErros(prev => ({...prev, camposImcompletos: false}))
 
-        if (!senhaValida.temMaiscula || !senhaValida.temMinuscula || !senhaValida.temNumero) {
-            setRequisitosSenha(false)
-            return
+        const senhaInvalida = validarSenha(data.senha)
+        const emailValido = validarEmail(data.email)
+
+        if (!emailValido) {
+             setErros(prev => ({...prev, emailInvalido: true}))
+        }
+
+        if (!senhaInvalida.temMaiscula || !senhaInvalida.temMinuscula || !senhaInvalida.temNumero) {
+            setErros(prev => ({...prev, senhaInvalida: true}))
         }
 
         if (data.senha !== data.confirmSenha) {
-            setSenhaDiferente(false)
+            setErros(prev => ({...prev, senhaIgual: true}))
+        }
+
+        if (Object.values(erros).includes(false)) {
             return
         }
 
@@ -62,7 +86,7 @@ export function CadastroForm(){
         })
         if (response.status !== 200) {
             if (response.status === 401) {
-                setPossuiConta(prevPossuiConta => !prevPossuiConta)
+                setErros(prev => ({...prev,possuiConta: true}))
                 return
             }
             console.log(response.Error)
@@ -72,6 +96,16 @@ export function CadastroForm(){
       
         if(response.ok) {
             localStorage.setItem('token', result.token)
+
+            setErros(prev => ({
+                ...prev,
+                camposImcompletos: false,
+                emailValido: false,
+                senhaInvalida: false,
+                senhaIgual: false,
+                possuiConta: false
+            }))
+
             navigate("/Home")
             return
         }
@@ -105,10 +139,14 @@ export function CadastroForm(){
                     <S.FormItem  type='text' placeholder='E-mail' name='email'></S.FormItem>
                     <S.FormItem type='password' placeholder='Senha' autoComplete='off' name='senha'></S.FormItem>
                     <S.FormItem  type='password'  placeholder='Confirmar Senha' autoComplete='off' name='confirmSenha'></S.FormItem>
-                    {possuiConta === true ? <S.aviso>Email já possui conta CriticPlay</S.aviso> : null}
-                    {senhaDiferente === false ? <S.aviso>As senhas precisam ser iguais</S.aviso> : null}
-                    {camposPreenchidos === false ? <S.aviso>Todos os campos precisam estar preenchidos</S.aviso> : null}
-                    {requisitosSenha === false ? <S.aviso>A senha Necessita ter 1 letra maiúscula, 1 minúscula e 1 número</S.aviso> : null}
+
+                    <S.avisosContainer>
+                        {erros.camposImcompletos ? <S.aviso>Todos os campos precisam estar preenchidos</S.aviso> : null}
+                        {erros.emailInvalido ? <S.aviso>Formato de email inválido</S.aviso> : null}
+                        {erros.senhaInvalida ? <S.aviso>A senha necessita ter, pelo menos,  1 letra maiúscula, 1 minúscula e 1 número</S.aviso> : null}
+                        {erros.senhaIgual ? <S.aviso>As senhas precisam ser iguais</S.aviso> : null}
+                        {erros.possuiConta ? <S.aviso>Email já possui conta CriticPlay</S.aviso> : null}
+                    </S.avisosContainer>
                     <S.FormButton type='submit' >Cadastrar</S.FormButton>
                 </S.FormContainer>
                 

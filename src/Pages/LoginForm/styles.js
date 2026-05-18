@@ -106,6 +106,15 @@ export const SingUpLink = styled.div`
     }
 `
 
+export const avisosContainer = styled.div`
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: auto;
+    gap: 0.1rem;
+`
+
 export const aviso = styled.div`
     font-weight: 400;
     font-size: 0.6rem;

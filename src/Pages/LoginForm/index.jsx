@@ -1,9 +1,34 @@
 import * as S from './styles.js'
 import {useNavigate} from 'react-router-dom'
+import { useState } from 'react'
 
 export function LoginForm(){
     
     const navigate = useNavigate()
+
+    const [erros,setErros] = useState({
+            camposImcompletos: false,
+            emailInvalido: false,
+            senhaInvalida: false,
+        })
+
+    function validarSenha(senha) {
+        const temMaiscula = /[A-Z]/.test(senha)
+        const temMinuscula = /[a-z]/.test(senha)
+        const temNumero = /[0-9]/.test(senha)
+
+        return {
+            temMaiscula,
+            temMinuscula,
+            temNumero
+        }
+    }
+
+    function validarEmail(email) {
+        const emailInvalido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+        return emailInvalido.test(email)
+    }
 
     async function handleLogin(e) {
         try{
@@ -14,6 +39,32 @@ export function LoginForm(){
             const data = {
                 email: formData.get('email'),
                 senha: formData.get('senha')
+            }
+
+            if (!data.email || !data.senha) {
+                setErros(prev => ({
+                    ...prev,
+                    camposImcompletos: true,
+                    emailValido: false,
+                    senhaInvalida: false
+                 }))
+                 
+                return
+            }
+
+            const senhaInvalida = validarSenha(data.senha)
+            const emailInvalido = validarEmail(data.email)
+
+            if (!emailInvalido) {
+                setErros(prev => ({...prev, emailInvalido: true}))
+            }
+
+            if (!senhaInvalida.temMaiscula || !senhaInvalida.temMinuscula || !senhaInvalida.temNumero) {
+                setErros(prev => ({...prev, senhaInvalida: true}))
+            }
+
+            if (Object.values(erros).includes(false)) {
+                return
             }
 
             const response = await fetch('http://localhost:3000/Login', {
@@ -28,6 +79,16 @@ export function LoginForm(){
 
             if(response.ok) {
                 localStorage.setItem('token', result.token)
+
+                setErros(prev => ({
+                    ...prev,
+                    camposImcompletos: false,
+                    emailValido: false,
+                    senhaInvalida: false,
+                    senhaIgual: false,
+                    possuiConta: false
+                }))
+
                 navigate("/Home")
                 return
             }
@@ -59,6 +120,11 @@ export function LoginForm(){
                     <S.FormItem name='email' type='text' placeholder='E-mail'></S.FormItem>
                     <S.FormItem name='senha' autoComplete='off' type='password' placeholder='Senha CriticZone'></S.FormItem>
                     <S.FormButton type='submit'>Login</S.FormButton>
+                    
+                    <S.avisosContainer>
+                        {erros.camposImcompletos ? <S.aviso>Todos os campos precisam estar preenchidos</S.aviso> : null}
+                        {erros.emailValido || erros.senhaInvalida ? <S.aviso>Credenciais Inválidas</S.aviso> : null}
+                    </S.avisosContainer>
                 </S.FormContainer>
                 
                 <S.UtilitiesContainer>
