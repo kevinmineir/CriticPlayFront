@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom"
 import Lupa from "../../Assets/Lupa.svg"
 import DefaultProfile from "../../Assets/DefaultProfile.jpg"
 import Menu from "../../Assets/Menu.svg"
+import configurações from "../../Assets/configurações.png"
 
 export function Header() {
     const navigate = useNavigate()
@@ -35,6 +36,12 @@ export function Header() {
                         <S.UserName>Place Holder</S.UserName>
                     </S.UserContainer>
                 </S.ProfileContainer>
+
+                <S.configContainer>
+                    <S.configButton>
+                        <S.configImage onClick={console.log('falta isso')} src={configurações}/>
+                    </S.configButton>
+                </S.configContainer>
             </S.Container>
         </>
     )

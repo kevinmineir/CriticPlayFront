@@ -16,7 +16,6 @@ export const LogoContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 0.5rem;
     border-radius: 30px;
     transition: background-color 0.3s ease;
     padding: clamp(0.2rem, 1vw, 0.4rem);
@@ -32,16 +31,13 @@ export const LogoContainer = styled.div`
 `
 export const CustomSpan = styled.span`
     font-size: clamp(1rem, 2vw, 1.5rem);
-    border-radius: 10px;
+    border-radius: clamp(5px,2vw,10px);
     font-weight: 600;
     user-select: none;
-    width: 8vw;
-    max-width: 4.7rem;
-    min-width: 3.3rem;
-    text-align: center;
-    max-height: 2.1rem;
-    min-height: 1.5rem;
-    height: 4vh;
+    color: white;
+    padding: clamp(0.1rem,1vw,0.3rem);
+    padding-top: 0;
+    padding-bottom: 0;
 `
 export const CustomSpan2 = styled.span`
     font-size: clamp(1rem, 2vw, 1.5rem);
@@ -57,6 +53,7 @@ export const SearchContainer = styled.form`
     flex-direction:row;
     justify-content:center;
     align-items: center;
+    flex: 1;
 `
 
 export const SearchBar = styled.input`
@@ -101,7 +98,7 @@ export const SeachButton = styled.button`
 `
 
 export const SeachIcon = styled.img`
-    max-width: 1.8rem;
+    max-width: 1.6rem;
     min-width: 1.1rem;
     width: 2.5vw;
     max-height: 1.6rem;
@@ -142,6 +139,9 @@ export const MenuButton = styled.button`
     margin-left: 0.5rem;
     background-color: rgb(20, 18, 18);
     transition: background-color 0.3s ease;
+    display: flex;
+    justify-self: center;
+    align-self: center;
 
     &:hover{
         background-color: #1a1a1a;
@@ -155,4 +155,49 @@ export const MenuImg = styled.img`
     height: 2.2rem;
     padding: 0;
     margin: 0;
+`
+
+export const configContainer = styled.div`
+    display:flex;
+    align-items: center;
+    justify-content: center;
+`
+
+export const configButton = styled.button`
+    background-color: pink;
+    color: #FF2D2D;
+    font-size: 2rem;
+    padding: 0;
+    border: none;
+    margin:0;
+    border-radius: 50%;
+    background-color: rgb(20, 18, 18);
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    transition: outline 0.3s ease;
+
+    &:hover{
+        cursor: pointer;
+        outline: white;
+    }
+    &:active{
+        outline: white;
+    }
+`
+
+export const configImage = styled.img`
+    width: 2.5rem;
+    height: 2.2rem;
+    padding: 0;
+    margin: 0;
+
+    &:hover{
+        cursor: pointer;
+        outline: white;
+    }
+    &:active{
+        outline: white;
+    }
 `

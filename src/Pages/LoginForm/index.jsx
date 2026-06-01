@@ -45,7 +45,7 @@ export function LoginForm(){
                 setErros(prev => ({
                     ...prev,
                     camposImcompletos: true,
-                    emailValido: false,
+                    emailInvalido: false,
                     senhaInvalida: false
                  }))
                  
@@ -83,7 +83,7 @@ export function LoginForm(){
                 setErros(prev => ({
                     ...prev,
                     camposImcompletos: false,
-                    emailValido: false,
+                    emailInvalido: false,
                     senhaInvalida: false,
                     senhaIgual: false,
                     possuiConta: false
@@ -123,7 +123,7 @@ export function LoginForm(){
                     
                     <S.avisosContainer>
                         {erros.camposImcompletos ? <S.aviso>Todos os campos precisam estar preenchidos</S.aviso> : null}
-                        {erros.emailValido || erros.senhaInvalida ? <S.aviso>Credenciais Inválidas</S.aviso> : null}
+                        {erros.emailInvalido || erros.senhaInvalida ? <S.aviso>Credenciais Inválidas</S.aviso> : null}
                     </S.avisosContainer>
                 </S.FormContainer>
                 
