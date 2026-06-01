@@ -49,4 +49,23 @@ export const gamesScroller = styled.div`
     margin-left: 1rem;
     width: 100%;
     flex-shrink: 0;
+    scroll-behavior: smooth;
+    padding-bottom: 0.5rem;
+    
+    &:hover::-webkit-scrollbar-thumb {
+        background-color: rgba(194, 194, 194, 1);
+    }
+
+    &::-webkit-scrollbar{
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb{
+    background-color: rgb(194, 194, 194,0);
+    border-radius: 20px;
+    }
+
+    &::-webkit-scrollbar-thumb{
+    background-color: rgb(194, 194, 194,1);
+    }
 `

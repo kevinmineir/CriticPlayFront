@@ -29,6 +29,27 @@ export function HomePage() {
                     </S.genreInfos>
                     <S.gamesScroller>
                         <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                         <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
                     </S.gamesScroller>
                 </S.gamesContainer>
 
@@ -38,6 +59,7 @@ export function HomePage() {
                         <S.seeMore>Ver Mais</S.seeMore>
                     </S.genreInfos>
                     <S.gamesScroller>
+                        <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
                         <Game image={macaco}gameName="macaco"gameNota="67"gameNotaText="SIXX SEVENNN"/>
                     </S.gamesScroller>
                 </S.gamesContainer>
